@@ -1,0 +1,25 @@
+# Security & Sensitive Files
+.env
+*.pem
+api_key_test.py
+*.sqlite3
+
+# Python / Django
+__pycache__/
+*.py[cod]
+*$py.class
+staticfiles/
+media/
+
+# Node / JS
+node_modules/
+npm-debug.log
+
+# Mac/Windows
+.DS_Store
+Thumbs.db
+
+# Project specific
+project.zip
+project_files.txt
+arvin.txt

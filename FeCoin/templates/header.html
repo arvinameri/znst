@@ -1,0 +1,128 @@
+{% load static %}
+<header class="app-header glass-panel sticky-header">
+  <a href="/" class="logo-section">
+    <div class="logo-img-wrapper">
+      <img
+        src="{% static 'fecoin_logo.png' %}"
+        alt="ZNST Logo"
+        class="main-logo"
+      />
+    </div>
+    <div class="brand-info">
+      <span class="brand-name">ZNST</span>
+      <span class="brand-slogan">Zinc Stable Token</span>
+    </div>
+  </a>
+
+  <nav class="desktop-nav">
+    <ul class="nav-links">
+      <li><a href="/" class="nav-link active">Home</a></li>
+      <li><a href="/blog/" class="nav-link">Blog</a></li>
+      <li><a href="/whitepaper/" class="nav-link">Whitepaper</a></li>
+    </ul>
+    <a href="#purchase-card" class="buy-token-btn-header">
+      <span>Buy Token</span>
+    </a>
+  </nav>
+
+  <div class="header-tools">
+    <div class="language-scroll-container">
+      <div class="language-menu">
+        <span onclick="changeLanguage('en')" title="English"
+          ><img src="https://flagcdn.com/w80/gb.png" alt="EN"
+        /></span>
+        <span onclick="changeLanguage('fa')" title="Persian"
+          ><img src="https://flagcdn.com/w80/ir.png" alt="FA"
+        /></span>
+        <span onclick="changeLanguage('ar')" title="Arabic"
+          ><img src="https://flagcdn.com/w80/ae.png" alt="AR"
+        /></span>
+        <span onclick="changeLanguage('zh')" title="Chinese"
+          ><img src="https://flagcdn.com/w80/cn.png" alt="ZH"
+        /></span>
+        <span onclick="changeLanguage('ru')" title="Russian"
+          ><img src="https://flagcdn.com/w80/ru.png" alt="RU"
+        /></span>
+        <span onclick="changeLanguage('tr')" title="Turkish"
+          ><img src="https://flagcdn.com/w80/tr.png" alt="TR"
+        /></span>
+        <span onclick="changeLanguage('es')" title="Spanish"
+          ><img src="https://flagcdn.com/w80/es.png" alt="ES"
+        /></span>
+      </div>
+    </div>
+
+    <div id="guide-btn" class="guide-icon-btn" title="Guide">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+    </div>
+
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu">
+      <span class="bar top"></span>
+      <span class="bar mid"></span>
+      <span class="bar bot"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+    <div class="mobile-menu-content glass-panel">
+      <button id="close-mobile-menu" class="close-menu-btn">&times;</button>
+      <div class="mobile-logo-center">
+        <img src="{% static 'fecoin_logo.png' %}" alt="ZNST" width="60" />
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="/" class="mobile-link">Home</a></li>
+        <li><a href="/blog/" class="mobile-link">Blog</a></li>
+        <li><a href="/whitepaper/" class="mobile-link">Whitepaper</a></li>
+        <li>
+          <a href="#purchase-card" class="mobile-buy-btn">Buy ZNST Token</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger-btn");
+    const closeBtn = document.getElementById("close-mobile-menu");
+    const overlay = document.getElementById("mobile-menu-overlay");
+    const body = document.body;
+    const mobileLinks = document.querySelectorAll(
+      ".mobile-link, .mobile-buy-btn"
+    );
+
+    function toggleMenu(show) {
+      if (show) {
+        overlay.classList.add("active");
+        body.style.overflow = "hidden";
+      } else {
+        overlay.classList.remove("active");
+        body.style.overflow = "";
+      }
+    }
+
+    if (hamburger) hamburger.addEventListener("click", () => toggleMenu(true));
+    if (closeBtn) closeBtn.addEventListener("click", () => toggleMenu(false));
+    if (overlay)
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) toggleMenu(false);
+      });
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => toggleMenu(false));
+    });
+  });
+</script>

@@ -1,0 +1,1597 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>ZNST Presale | Future of Zinc</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="ZNST App" />
+
+    <link rel="apple-touch-icon" href="{% static 'images/app-icon.png' %}" />
+    <link rel="manifest" href="{% static 'manifest.json' %}" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/assistant.css' %}?v=9001" />
+    
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{% static 'fecoin_logo.png' %}"
+    />
+    <link rel="icon" type="image/png" href="{% static 'fecoin_logo.png' %}" />
+
+    <script>
+      window.ZNDT_SALE_ADDRESS = "{{ zndt_sale_address }}";
+      window.USDT_ADDRESS = "{{ usdt_address }}";
+    </script>
+
+    <style>
+      /* ========================================= */
+      /* 💎 ZNST INTEGRATED STYLE (INTERNAL) 💎 */
+      /* ========================================= */
+
+      :root {
+        --neon-green: #00ffa3;
+        --neon-glow: rgba(0, 255, 163, 0.4);
+        --dark-bg: #050b14;
+        --panel-bg: rgba(16, 24, 39, 0.85);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: #ffffff;
+        --text-secondary: #94a3b8;
+        --font-main: "Vazirmatn", "Poppins", sans-serif;
+        --header-height: 80px;
+      }
+
+      /* --- RESET & BASE STYLES --- */
+      * {
+        box-sizing: border-box !important;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        scroll-behavior: smooth;
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        background-color: var(--dark-bg);
+        color: var(--text-primary);
+        font-family: var(--font-main);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        overflow-x: hidden !important;
+        padding-bottom: 80px;
+        width: 100%;
+        max-width: 100vw;
+        position: relative;
+      }
+
+      .amount, .token-name, input, .brand, .brand-name, .full-name, .unit, .result-value, select, .nav-link {
+        font-family: "Poppins", sans-serif !important;
+      }
+
+      /* --- BACKGROUND VIDEO --- */
+      #background-video {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -2;
+        object-fit: cover;
+      }
+
+      .video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, rgba(5, 11, 20, 0.75) 0%, #050b14 95%);
+        z-index: -1;
+        backdrop-filter: blur(5px);
+      }
+
+      .app-container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+        margin: 0 auto;
+      }
+
+      /* --- GLASSMORPHISM UTILITIES --- */
+      .glass-panel {
+        background: var(--panel-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+
+      .glow-border {
+        border: 1px solid rgba(0, 255, 163, 0.4);
+        box-shadow: 0 0 25px rgba(0, 255, 163, 0.15);
+      }
+
+      /* ================================================= */
+      /* 🚀 HEADER STYLES (NEW FIXED VERSION) 🚀 */
+      /* ================================================= */
+
+      .sticky-header {
+        position: sticky;
+        top: 20px;
+        z-index: 1000;
+        margin-bottom: 30px;
+      }
+
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 24px;
+        height: var(--header-height);
+        transition: all 0.3s ease;
+      }
+
+      /* LOGO SECTION */
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .logo-img-wrapper img {
+        width: 44px;
+        height: 44px;
+        filter: drop-shadow(0 0 8px var(--neon-glow));
+      }
+      .brand-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .brand-name {
+        font-size: 24px;
+        font-weight: 800;
+        color: #fff;
+      }
+      .brand-slogan {
+        font-size: 12px;
+        color: var(--neon-green);
+        font-weight: 500;
+      }
+
+      /* DESKTOP NAV */
+      .desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+      }
+      .nav-link {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        position: relative;
+        transition: 0.3s;
+      }
+      .nav-link:hover {
+        color: #fff;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 50%;
+        background-color: var(--neon-green);
+        box-shadow: 0 0 10px var(--neon-green);
+        transition: width 0.3s ease, left 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+        left: 0;
+      }
+      .buy-token-btn-header {
+        padding: 8px 20px;
+        background: rgba(0, 255, 163, 0.1);
+        border: 1px solid var(--neon-green);
+        border-radius: 50px;
+        color: var(--neon-green);
+        font-weight: 700;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .buy-token-btn-header:hover {
+        background: var(--neon-green);
+        color: #050b14;
+        box-shadow: 0 0 15px var(--neon-glow);
+      }
+
+      /* TOOLS SECTION & FLAGS */
+      .header-tools {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      /* Scroll Container for Flags */
+      .language-scroll-container {
+          max-width: 250px;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+      .language-scroll-container::-webkit-scrollbar {
+          display: none;
+      }
+
+      .language-menu {
+        display: flex;
+        gap: 8px;
+        padding: 5px;
+        white-space: nowrap;
+      }
+
+      .language-menu span {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: transform 0.2s;
+      }
+      .language-menu span:hover {
+        transform: scale(1.2);
+      }
+      .language-menu img {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        object-fit: cover;
+        display: block;
+      }
+
+      .guide-icon-btn {
+        color: #fff;
+        cursor: pointer;
+        transition: 0.3s;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+      }
+      .guide-icon-btn:hover {
+          color: var(--neon-green);
+          opacity: 1;
+      }
+
+      /* MOBILE MENU & HAMBURGER */
+      .hamburger-btn {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 22px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+      .bar {
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+      }
+
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        backdrop-filter: blur(5px);
+      }
+      .mobile-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu-content {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        background: #0f172a !important;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease;
+      }
+
+      html[dir="rtl"] .mobile-menu-content {
+          right: 0;
+          transform: translateX(100%);
+          border-left: 1px solid var(--neon-green);
+      }
+      html[dir="rtl"] .mobile-menu-overlay.active .mobile-menu-content {
+          transform: translateX(0);
+      }
+      html[dir="ltr"] .mobile-menu-content {
+          left: 0;
+          transform: translateX(-100%);
+          border-right: 1px solid var(--neon-green);
+      }
+
+      .mobile-logo-center {
+          margin-top: 40px;
+          margin-bottom: 40px;
+      }
+
+      .mobile-nav-links {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .mobile-link {
+        font-size: 18px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+
+      .mobile-buy-btn {
+        margin-top: 20px;
+        background: var(--neon-green);
+        color: #000;
+        padding: 12px 30px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .close-menu-btn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 30px;
+        cursor: pointer;
+      }
+
+      /* RESPONSIVE HEADER */
+      @media (max-width: 1200px) {
+        .desktop-nav { display: none; }
+        .hamburger-btn { display: flex; }
+        .brand-slogan { display: none; }
+        .language-scroll-container { max-width: 140px; }
+      }
+
+      /* ========================================= */
+      /* 🧩 ORIGINAL STYLES PRESERVED 🧩 */
+      /* ========================================= */
+      
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 24px;
+        margin-top: 24px;
+        align-items: start;
+      }
+      .left-column, .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        min-width: 0;
+      }
+      .right-column {
+        position: sticky;
+        top: 20px;
+      }
+      .purchase-card {
+        padding: 30px;
+        position: relative;
+      }
+      .card-header-center {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .card-header-center h2 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .input-container {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border-color);
+        border-radius: 18px;
+        padding: 15px;
+        transition: 0.3s;
+        width: 100%;
+      }
+      .input-container:focus-within {
+        border-color: var(--neon-green);
+        box-shadow: 0 0 15px rgba(0, 255, 163, 0.15);
+      }
+      .input-container.filled {
+        background: rgba(0, 255, 163, 0.05);
+        border-color: rgba(0, 255, 163, 0.3);
+      }
+      .input-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+      .input-row input, .result-value {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 700;
+        width: 100%;
+        outline: none;
+        min-width: 0;
+        flex: 1;
+      }
+      .currency-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #334155;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .currency-badge img {
+        width: 20px;
+        height: 20px;
+      }
+      .currency-badge.secondary {
+        background: var(--neon-green);
+        color: #050b14;
+      }
+      .input-label-sub {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 6px;
+        font-family: var(--font-main);
+      }
+      .conversion-arrow {
+        display: flex;
+        justify-content: center;
+        margin: -14px 0;
+        position: relative;
+        z-index: 2;
+      }
+      .conversion-arrow svg {
+        background: #0f172a;
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        padding: 6px;
+        width: 34px;
+        height: 34px;
+        color: var(--text-secondary);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+      .action-buttons {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+      .btn-connect, .btn-confirm {
+        width: 100%;
+        padding: 16px;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn-connect {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border: 1px solid var(--border-color);
+      }
+      .btn-connect:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .btn-confirm {
+        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        color: #000;
+        box-shadow: 0 4px 20px var(--neon-glow);
+      }
+      .btn-confirm:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+      }
+
+      /* CHART & STATS */
+      .chart-wrapper {
+        padding: 20px;
+        height: 380px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .live-badge {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.6; }
+        100% { opacity: 1; }
+      }
+      #chart {
+        flex-grow: 1;
+        width: 100%;
+        min-height: 0;
+      }
+      .stats-wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding: 24px;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .stat-item {
+        text-align: center;
+        flex: 1;
+        min-width: 90px;
+      }
+      .stat-item h4 {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .stat-value {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .stat-value.highlight {
+        color: var(--neon-green);
+        text-shadow: 0 0 10px rgba(0, 255, 163, 0.2);
+      }
+      .stat-divider {
+        width: 1px;
+        height: 40px;
+        background: linear-gradient(to bottom, transparent, var(--border-color), transparent);
+      }
+
+      /* DOWNLOAD CARDS */
+      .download-card {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        background: linear-gradient(90deg, rgba(16, 24, 39, 0.6) 0%, rgba(0, 255, 163, 0.05) 100%);
+      }
+      #download-ios-card {
+        background: linear-gradient(90deg, rgba(16, 24, 39, 0.6) 0%, rgba(59, 130, 246, 0.1) 100%);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        margin-top: 15px;
+      }
+      .download-content {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex: 1;
+      }
+      .dl-icon {
+        width: 42px;
+        height: 42px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .dl-text h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 3px;
+      }
+      .dl-text p {
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .dl-btn {
+        background: #fff;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+        transition: 0.3s;
+        white-space: nowrap;
+        border: none;
+        cursor: pointer;
+      }
+      .dl-btn:hover {
+        background: var(--neon-green);
+        transform: translateY(-2px);
+      }
+
+      /* SWAP CARD */
+      .swap-card {
+        padding: 24px;
+        width: 100%;
+      }
+      .swap-header h3 {
+        font-size: 16px;
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+      }
+      .swap-body {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .swap-row {
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 12px 16px;
+        border-radius: 14px;
+        border: 1px solid var(--border-color);
+        width: 100%;
+        gap: 10px;
+      }
+      .swap-row:focus-within {
+        border-color: #3b82f6;
+      }
+      .swap-row input, .swap-result {
+        flex: 1;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        outline: none;
+        min-width: 0;
+      }
+      .token-select-wrapper {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        position: relative;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 4px 8px;
+        min-width: 85px;
+      }
+      .token-select-wrapper select {
+        background: transparent;
+        border: none;
+        color: var(--neon-green);
+        font-weight: 700;
+        outline: none;
+        width: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        padding: 5px 20px 5px 5px;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300ffa3%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: 10px;
+        font-size: 15px;
+      }
+      .unit {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        padding-left: 8px;
+      }
+      .swap-divider {
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 16px;
+        margin: -6px 0;
+      }
+      .btn-swap {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        margin-top: 10px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      }
+
+      /* RTL Support */
+      html[dir="rtl"] .token-select-wrapper select {
+        padding: 5px 5px 5px 20px;
+        background-position: left center;
+      }
+      html[dir="rtl"] .currency-badge,
+      html[dir="rtl"] .token-select-wrapper {
+        margin-right: 0;
+        margin-left: 0;
+      }
+      html[dir="rtl"] .guide-icon-btn {
+        margin-left: 0;
+        margin-right: 5px;
+      }
+
+      /* RESPONSIVE BODY */
+      @media (max-width: 900px) {
+        .app-container {
+          padding: 10px !important;
+          width: 100% !important;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .glass-panel, .purchase-card, .swap-card, .chart-wrapper, .download-card {
+          width: 100% !important;
+          max-width: 100% !important;
+          padding: 20px 16px !important;
+          margin: 0 0 16px 0 !important;
+          border-radius: 20px !important;
+        }
+        .main-grid {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: 16px;
+        }
+        .left-column, .right-column {
+          width: 100%;
+          order: unset;
+        }
+        .input-row, .swap-row {
+          flex-wrap: nowrap !important;
+        }
+        .download-card {
+          flex-direction: column !important;
+          text-align: center !important;
+          align-items: stretch !important;
+        }
+        .download-content {
+          flex-direction: column !important;
+          text-align: center;
+        }
+        .dl-icon { margin: 0 auto 10px auto; }
+        .dl-btn { width: 100%; margin-top: 10px; text-align: center; }
+      }
+
+      /* ========================================= */
+      /* 🧩 MODALS (FIXED GUIDE & WALLET) 🧩 */
+      /* ========================================= */
+
+      .modal-overlay, .wallet-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 2000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(8px);
+      }
+      .modal-overlay[style*="display: none"],
+      .wallet-modal-overlay[style*="display: none"] {
+        display: none !important;
+      }
+
+      /* GUIDE MODAL - PRESERVED */
+      .modal-content.guide-container {
+        width: 92%;
+        max-width: 450px;
+        background: #1e293b;
+        border-radius: 24px;
+        border: 1px solid rgba(74, 222, 128, 0.3);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        max-height: 85vh;
+      }
+      .guide-header {
+        background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+        padding: 16px;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .guide-timeline {
+        padding: 16px;
+        overflow-y: auto;
+        flex-grow: 1;
+        background: #1e293b;
+      }
+      .guide-footer {
+        padding: 16px;
+        background: #1e293b;
+        border-top: 1px solid var(--border-color);
+      }
+      .guide-done-btn {
+        width: 100%;
+        padding: 14px;
+        background: var(--neon-green);
+        color: #050b14;
+        border: none;
+        border-radius: 14px;
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .guide-step {
+        position: relative;
+        padding-left: 20px;
+        padding-bottom: 30px;
+        border-left: 2px dashed rgba(74, 222, 128, 0.2);
+      }
+      .guide-step:last-child {
+        border-left: none;
+        padding-bottom: 0;
+      }
+      .guide-step::before {
+        content: "";
+        position: absolute;
+        left: -7px;
+        top: 5px;
+        width: 12px;
+        height: 12px;
+        background: var(--neon-green);
+        border-radius: 50%;
+        border: 2px solid #1e293b;
+        box-shadow: 0 0 8px var(--neon-glow);
+      }
+      .guide-step h3 {
+        font-size: 15px;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+      .guide-step p {
+        font-size: 13px;
+        color: #cbd5e1;
+        line-height: 1.6;
+      }
+      /* CRITICAL FIX FOR GUIDE IMAGE */
+      .guide-step img {
+        width: 100%;
+        border-radius: 12px;
+        margin-top: 10px;
+        border: 1px solid var(--border-color);
+      }
+      html[dir="rtl"] .guide-step {
+        padding-left: 0;
+        padding-right: 20px;
+        border-left: none;
+        border-right: 2px dashed rgba(74, 222, 128, 0.2);
+      }
+      html[dir="rtl"] .guide-step::before {
+        left: auto;
+        right: -7px;
+      }
+
+      /* WALLET & ERROR MODALS */
+      .wallet-modal-content {
+        background: rgba(18, 18, 18, 0.95) !important;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 30px 24px;
+        text-align: center;
+        max-width: 90%;
+        width: 360px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        position: relative;
+      }
+      .wallet-modal-close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        transition: 0.2s;
+      }
+      .wallet-modal-close-btn:hover { background: rgba(255, 255, 255, 0.2); }
+      html[dir="rtl"] .wallet-modal-close-btn { right: auto; left: 15px; }
+
+      .wallet-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .wallet-option-btn {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-color);
+        padding: 16px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: left;
+      }
+      .wallet-option-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--neon-green);
+      }
+      .wallet-option-btn img {
+        width: 32px;
+        height: 32px;
+        margin-right: 15px;
+      }
+      html[dir="rtl"] .wallet-option-btn { text-align: right; }
+      html[dir="rtl"] .wallet-option-btn img { margin-right: 0; margin-left: 15px; }
+      .wallet-option-btn span {
+        font-weight: 700;
+        font-size: 16px;
+        color: #fff;
+        display: block;
+      }
+      .wallet-option-btn small {
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 400;
+        margin-top: 2px;
+        display: block;
+      }
+
+      #modal-soon-title { font-size: 1.5rem; margin-bottom: 10px; font-weight: 800; color: #3b82f6; }
+      #modal-soon-message { font-size: 1rem; line-height: 1.5; color: #e2e8f0 !important; margin-bottom: 20px !important; }
+      #modal-soon-action-btn { width: 100%; padding: 14px; border-radius: 14px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important; color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+      #ios-install-modal .wallet-modal-content { border-color: rgba(59, 130, 246, 0.5) !important; }
+      #ios-got-it-btn { margin-top: 15px; background: #3b82f6; color: #fff; }
+      wcm-modal { position: relative; z-index: 10000 !important; }
+    </style>
+  </head>
+
+  <body>
+    <video autoplay muted loop playsinline id="background-video">
+      <source src="{% static 'videofe.mp4' %}" type="video/mp4" />
+    </video>
+
+    <div class="video-overlay"></div>
+
+    <div class="app-container">
+      
+      <header class="app-header glass-panel sticky-header">
+        <a href="/" class="logo-section">
+            <div class="logo-img-wrapper">
+                <img src="{% static 'fecoin_logo.png' %}" alt="ZNST Logo" class="main-logo"/>
+            </div>
+            <div class="brand-info">
+                <span class="brand-name">ZNST</span>
+                <span class="brand-slogan">Zinc Stable Token</span>
+            </div>
+        </a>
+
+        <nav class="desktop-nav">
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link active">Home</a></li>
+                <li><a href="/blog/" class="nav-link">Blog</a></li>
+                <li><a href="/whitepaper/" class="nav-link">Whitepaper</a></li>
+            </ul>
+            <a href="#purchase-card" class="buy-token-btn-header">
+                <span>Buy Token</span>
+            </a>
+        </nav>
+
+        <div class="header-tools">
+            <div class="language-scroll-container">
+                <div class="language-menu">
+                    <span onclick="changeLanguage('en')" title="English"><img src="https://flagcdn.com/w80/gb.png" alt="EN"/></span>
+                    <span onclick="changeLanguage('fa')" title="Persian"><img src="https://flagcdn.com/w80/ir.png" alt="FA"/></span>
+                    <span onclick="changeLanguage('ar')" title="Arabic"><img src="https://flagcdn.com/w80/ae.png" alt="AR"/></span>
+                    <span onclick="changeLanguage('zh')" title="Chinese"><img src="https://flagcdn.com/w80/cn.png" alt="ZH"/></span>
+                    <span onclick="changeLanguage('ru')" title="Russian"><img src="https://flagcdn.com/w80/ru.png" alt="RU"/></span>
+                    <span onclick="changeLanguage('tr')" title="Turkish"><img src="https://flagcdn.com/w80/tr.png" alt="TR"/></span>
+                    <span onclick="changeLanguage('es')" title="Spanish"><img src="https://flagcdn.com/w80/es.png" alt="ES"/></span>
+                </div>
+            </div>
+
+            <div id="guide-btn" class="guide-icon-btn" title="Guide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu">
+                <span class="bar top"></span>
+                <span class="bar mid"></span>
+                <span class="bar bot"></span>
+            </button>
+        </div>
+
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+            <div class="mobile-menu-content glass-panel">
+                <button id="close-mobile-menu" class="close-menu-btn">&times;</button>
+                <div class="mobile-logo-center">
+                     <img src="{% static 'fecoin_logo.png' %}" alt="ZNST" width="60" />
+                </div>
+                <ul class="mobile-nav-links">
+                    <li><a href="/" class="mobile-link">Home</a></li>
+                    <li><a href="/blog/" class="mobile-link">Blog</a></li>
+                    <li><a href="/whitepaper/" class="mobile-link">Whitepaper</a></li>
+                    <li><a href="#purchase-card" class="mobile-buy-btn">Buy ZNST Token</a></li>
+                </ul>
+            </div>
+        </div>
+      </header>
+      <div class="main-grid">
+        <div class="left-column">
+          <div class="chart-wrapper glass-panel">
+            <div class="card-header">
+              <h3>LME Zinc Market</h3>
+              <span class="live-badge">LIVE</span>
+            </div>
+            <div id="chart"></div>
+          </div>
+
+          <div class="stats-wrapper glass-panel">
+            <div class="stat-item">
+              <h4 id="tokens-sold-title">Sold</h4>
+              <div id="tokens-sold-amount" class="stat-value highlight">--</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <h4 id="available-tokens-title">Available</h4>
+              <div id="available-tokens-amount" class="stat-value">--</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <h4 id="fecoin-price-title">Price</h4>
+              <div id="price-display" class="stat-value glow-text">...</div>
+            </div>
+          </div>
+
+          <div class="downloads-section app-only-hide">
+            <div id="download-android-card" class="download-card glass-panel">
+              <div class="download-content">
+                <div class="dl-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#4ade80"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"
+                    />
+                  </svg>
+                </div>
+                <div class="dl-text">
+                  <h3 id="dl-android-title">Android App</h3>
+                  <p id="dl-android-desc">Direct APK • No Play Store</p>
+                </div>
+              </div>
+              <a href="app.apk" download class="dl-btn">
+                <span id="dl-android-btn">Download APK</span>
+              </a>
+            </div>
+
+            <div
+              id="download-ios-card"
+              class="download-card glass-panel"
+              style="margin-top: 15px"
+            >
+              <div class="download-content">
+                <div class="dl-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 20h9" />
+                    <path
+                      d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                    />
+                  </svg>
+                </div>
+                <div class="dl-text">
+                  <h3 id="dl-ios-title">iOS Web App</h3>
+                  <p id="dl-ios-desc">Add to Home Screen</p>
+                </div>
+              </div>
+              <button onclick="window.openIOSGuide()" class="dl-btn">
+                <span id="dl-ios-btn">Install Guide</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="purchase-card glass-panel glow-border">
+            <div class="card-header-center">
+              <h2 id="you-pay-label">Buy ZNST</h2>
+            </div>
+
+            <div class="input-container">
+              <div class="input-row">
+                <input
+                  type="number"
+                  id="usdt-amount"
+                  placeholder="0"
+                  value="10"
+                />
+                <div class="currency-badge">
+                  <img
+                    src="{% static 'images/usdt-logo.png' %}"
+                    onerror="this.style.display='none'"
+                    alt=""
+                  />
+                  USDT
+                </div>
+              </div>
+              <div class="input-label-sub"></div>
+            </div>
+
+            <div class="conversion-arrow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </div>
+
+            <div class="input-container filled">
+              <div class="input-row">
+                <div id="zndt-receive-amount" class="result-value">0.00</div>
+                <div class="currency-badge secondary">ZNST</div>
+              </div>
+              <div class="input-label-sub"></div>
+            </div>
+
+            <div class="action-buttons">
+              <button id="connect-wallet-btn" class="btn-connect">
+                <span id="connect-wallet-text">Connect Wallet</span>
+              </button>
+              <button id="confirm-btn" class="btn-confirm">
+                <span id="confirm-text">Confirm Purchase</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="swap-card" class="swap-card glass-panel">
+            <div class="swap-header">
+              <h3 id="swap-title">Quick Swap</h3>
+            </div>
+            <div class="swap-body">
+              <div class="swap-row">
+                <label id="swap-you-pay-label" style="display: none"></label>
+                <input type="number" id="swap-amount-input" placeholder="0.0" />
+                <div class="token-select-wrapper">
+                  <select id="crypto-select">
+                    <option value="TRX">TRX</option>
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="DOGE">DOGE</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="swap-divider">=</div>
+
+              <div class="swap-row">
+                <label
+                  id="swap-you-receive-label"
+                  style="display: none"
+                ></label>
+                <div id="usdt-amount-display" class="swap-result">0.0</div>
+                <span class="unit">USDT</span>
+              </div>
+
+              <button id="execute-swap-btn" class="btn-swap">Swap Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ai-assistant-button" class="assistant-fab">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        ></path>
+      </svg>
+    </div>
+
+    <div id="ai-assistant-window" class="assistant-window hidden">
+      <div class="assistant-header">
+        <h3 id="assistant-title">Personal Assistant</h3>
+        <button id="close-assistant-btn" class="close-btn">&times;</button>
+      </div>
+      <div id="assistant-body" class="assistant-body">
+        <div class="message bot-message">
+          <p id="assistant-welcome-msg">Hi! How can I help?</p>
+        </div>
+        <div
+          id="typing-indicator"
+          class="message bot-message typing-indicator hidden"
+        >
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="assistant-footer">
+        <form id="assistant-form" class="assistant-form">
+          <input
+            type="text"
+            id="assistant-input"
+            placeholder="Ask..."
+            autocomplete="off"
+          />
+          <button type="submit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="guide-modal" class="modal-overlay" style="display: none">
+      <div class="modal-content guide-container">
+        <button id="guide-close-btn" class="modal-close-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="guide-header">
+          <div class="guide-icon-badge">🎓</div>
+          <h2 id="guide-title-text">Purchase Guide</h2>
+          <p class="guide-subtitle">Step-by-Step Tutorial</p>
+        </div>
+        <div id="guide-content" class="guide-timeline"></div>
+        <div class="guide-footer">
+          <button onclick="closeGuide()" class="guide-done-btn">Got it!</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="wallet-select-modal"
+      class="wallet-modal-overlay"
+      style="display: none"
+    >
+      <div class="wallet-modal-content">
+        <button id="wallet-modal-close" class="wallet-modal-close-btn">
+          &times;
+        </button>
+        <h2 id="wallet-modal-title">Connect Wallet</h2>
+        <p id="wallet-modal-desc">Select connection method:</p>
+        <div class="wallet-options">
+          <button id="connect-tronlink-btn" class="wallet-option-btn">
+            <img src="{% static 'images/tronlink-logo.png' %}" alt="TL" />
+            <span id="wallet-modal-tronlink-text">TronLink</span>
+            <small id="wallet-modal-tronlink-desc">(Extension)</small>
+          </button>
+          <button id="connect-wc-btn" class="wallet-option-btn">
+            <img src="{% static 'images/walletconnect-logo.png' %}" alt="WC" />
+            <span id="wallet-modal-wc-text">WalletConnect</span>
+            <small id="wallet-modal-wc-desc">(Mobile)</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="generic-error-modal"
+      class="wallet-modal-overlay"
+      style="display: none"
+    >
+      <div
+        class="wallet-modal-content"
+        style="border-color: #ef4444 !important"
+      >
+        <button id="modal-error-close-btn" class="wallet-modal-close-btn">
+          &times;
+        </button>
+        <h2 id="modal-error-title" style="color: #ef4444">Error</h2>
+        <p id="modal-error-message" style="margin-top: 20px; color: #fff"></p>
+        <button
+          id="modal-error-understand-btn"
+          class="guide-done-btn"
+          style="margin-top: 20px; background: #ef4444"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="coming-soon-modal"
+      class="wallet-modal-overlay"
+      style="display: none"
+    >
+      <div
+        class="wallet-modal-content"
+        style="border-color: #3b82f6 !important"
+      >
+        <button id="modal-soon-close-btn" class="wallet-modal-close-btn">
+          &times;
+        </button>
+        <h2 id="modal-soon-title" style="color: #3b82f6">Coming Soon</h2>
+        <p id="modal-soon-message" style="margin-top: 20px; color: #fff"></p>
+        <button
+          id="modal-soon-action-btn"
+          class="guide-done-btn"
+          style="margin-top: 20px; background: #3b82f6"
+        >
+          Use TokenPocket
+        </button>
+      </div>
+    </div>
+
+    <div id="ios-install-modal" class="modal-overlay" style="display: none">
+      <div class="wallet-modal-content">
+        <button
+          onclick="document.getElementById('ios-install-modal').style.display='none'"
+          class="wallet-modal-close-btn"
+        >
+          &times;
+        </button>
+        <h2 id="ios-modal-title" style="color: #fff">Install on iOS</h2>
+        <div
+          style="
+            margin: 20px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 10px">
+            <p id="ios-step1-text" style="color: #ccc; margin: 0">
+              1. Tap the <b>Share</b> button.
+            </p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#3b82f6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="
+                background: rgba(59, 130, 246, 0.1);
+                padding: 3px;
+                border-radius: 6px;
+              "
+            >
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </div>
+
+          <div
+            style="
+              width: 100%;
+              height: 1px;
+              background: rgba(255, 255, 255, 0.1);
+            "
+          ></div>
+
+          <div style="display: flex; align-items: center; gap: 10px">
+            <p id="ios-step2-text" style="color: #ccc; margin: 0">
+              2. Tap <b>"Add to Home Screen"</b>.
+            </p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#3b82f6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="
+                background: rgba(59, 130, 246, 0.1);
+                padding: 3px;
+                border-radius: 6px;
+              "
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </div>
+        </div>
+        <button
+          id="ios-got-it-btn"
+          onclick="document.getElementById('ios-install-modal').style.display='none'"
+          class="guide-done-btn"
+        >
+          Got it
+        </button>
+      </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger-btn');
+            const closeBtn = document.getElementById('close-mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const body = document.body;
+            const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-buy-btn');
+
+            function toggleMenu(show) {
+                if (show) {
+                    overlay.classList.add('active');
+                    body.style.overflow = 'hidden';
+                } else {
+                    overlay.classList.remove('active');
+                    body.style.overflow = '';
+                }
+            }
+
+            if(hamburger) hamburger.addEventListener('click', () => toggleMenu(true));
+            if(closeBtn) closeBtn.addEventListener('click', () => toggleMenu(false));
+            if(overlay) overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) toggleMenu(false);
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => toggleMenu(false));
+            });
+        });
+    </script>
+
+    <script
+      src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"
+      defer
+    ></script>
+    <script src="{% static 'js/script.js' %}?v=9001" type="module"></script>
+    <script src="{% static 'js/assistant.js' %}?v=9001" defer></script>
+  </body>
+</html>
