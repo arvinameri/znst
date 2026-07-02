@@ -205,7 +205,7 @@ This project was developed as a proprietary Web3 solution. Source code is shared
 <div align="center">
   <h3>Built by Arvin Ameri</h3>
 
-  <p>📍 Amsterdam, Netherlands &nbsp;|&nbsp; Full-Stack & Web3 Developer</p>
+  <p>📍 Zanjan, Iran &nbsp;|&nbsp; Full-Stack & Web3 Developer</p>
 
   <p>
     <a href="https://www.linkedin.com/in/arvinameri">
